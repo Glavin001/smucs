@@ -86,3 +86,15 @@ body {
     padding-right: 0;
   }
 }
+
+
+
+/* GoInstant */
+.goinstant-userlist.goinstant-override li {
+  /* Add custom styles */
+  height: 32px; 
+}
+.goinstant-userlist.goinstant-override .goinstant-collapse {
+  /* Add custom styles */
+  bottom: -27px;
+}
