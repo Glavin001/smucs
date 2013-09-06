@@ -3,6 +3,6 @@ SMUCS
 
 Saint Mary's University Computer Science
 
-Live website: https://github.com/Glavin001/smucs
+Live website: http://glavin001.github.io/smucs/
 
 This is a repository for the SMU CS website.
