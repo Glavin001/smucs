@@ -1,81 +1,240 @@
 <!DOCTYPE html>
 <html>
     <head lang="en">
-        <title>Bootstrap 101 Template</title>
+        <title>SMUCS</title>
         
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+        <meta name="description" content="Saint Mary's University Computer Science">
+        <meta name="author" content="Glavin Wiechert">
+        <link rel="shortcut icon" href="ico/favicon.png">
                 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <!-- Custom styles for this template -->
-        <link href="css/justified-nav.css" rel="stylesheet">
-        
+        <link href="css/main.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/signin.css" rel="stylesheet">
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery.min.js"></script>
+
+        <!-- GoInstant API -->
+          <script src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+        <script type="text/javascript">
+
+            function onLoad() {
+
+              var url = 'https://goinstant.net/glavin001/SMUCS';
+              var platform = new goinstant.Platform(url);
+              platform.connect(function (err) {
+                if (err) {
+                  console.log('Error connecting to platform:', err);
+                  return;
+                }
+
+                // 
+                var room = platform.room('global');
+                room.join(function (err) {
+                  if (err) {
+                    console.log('Error connecting to room:', err);
+                    return;
+                  }
+
+                  /*
+                  var nameKey = room.key('/name');
+                  var nameInput = document.getElementById('name');
+
+                  // handle sets from remote users
+                  nameKey.on('set', function(value, context) {
+                    nameInput.value = value;
+                  });
+
+                  // set the value when we load
+                  nameKey.get(function(err, value, context) {
+                    nameInput.value = value;
+                  });
+
+                  function setName() {
+                    setTimeout(function() {
+                      // set key to the new value
+                      nameKey.set(nameInput.value);
+                    }, 0);
+                  }
+
+                  nameInput.addEventListener('keyup', setName);
+                  nameInput.addEventListener('change', setName);
+                  */
+                });
+
+
+                // User List component
+                goinstant.components.load('goinstant/v1/user-list', function(err, UserList) {
+
+                  var exampleRoom = platform.room('global');
+                  var options = {
+                    room: exampleRoom
+                  };
+
+                  var userList = new UserList(options);
+
+                  userList.initialize(function(err) {
+                    // ready
+                  });
+
+                });
+
+                // Load the notifications component
+                  goinstant.components.load('goinstant/v1/notifications', function(err, Notifications) {
+
+                    var exampleRoom = platform.room('exampleRoom');
+
+                    exampleRoom.join(function(err) {
+                      if (err) {
+                        console.log('Error joining room:', err);
+                        return;
+                      }
+
+                      // Create a new instance of the component
+                        var notifications = new Notifications();
+                        var exampleRoom = platform.room('exampleRoom');
+
+                        exampleRoom.join(function(err) {
+
+                          notifications.subscribe(exampleRoom, function(err) {
+                            // We're receiving notifications!
+                          });
+
+                          notifications.publish({
+                            room: exampleRoom,
+                            type: 'info',
+                            message: 'A new user has joined.'
+                          }, function(err) {
+                            // Notification sent
+                          });
+
+                        });
+                    });
+
+                });
+
+              });
+            }
+
+          </script>
+
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
          <script src="js/html5shiv.js"></script>
          <script src="js/respond.min.js"></script>
          <![endif]-->
     </head>
-    <body>
+    <body onload="onLoad();">
         
         <div class="container">
             
+            <!--
+            <label for="name">Name</label><input type="text" id="name" />
+            -->
+
             <div class="masthead">
                 <h3 class="text-muted">SMUCS</h3>
-                <ul class="nav nav-justified">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Classes</a></li>
+                <ul class="nav nav-tabs nav-justified" id="nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                    <li><a href="#classes">Classes</a></li>
                     <li><a href="#">Events</a></li>
                     <li><a href="#">Downloads</a></li>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#signin" data-toggle="tab">Sign In</a></li>
                 </ul>
             </div>
             
-            <!-- Jumbotron -->
-            <div class="jumbotron">
-                <h1>Marketing stuff!</h1>
-                <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Get started today</a></p>
+
+            <div class="tab-content">
+
+                <!-- Home -->
+              <div class="tab-pane active" id="home">
+
+                <!-- Jumbotron -->
+                <div class="jumbotron">
+                    <h1>Welcome to SMU CS!</h1>
+                    <p class="lead">This group helps us have a sense of community in Computer Science.</p>
+                    <p><a class="btn btn-lg btn-success" href="#ideas" data-toggle="tab">Share your ideas!</a></p>
+                </div>
+                
+                <!-- Example row of columns -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-primary" href="#">View details »</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-primary" href="#">View details »</a></p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+                        <p><a class="btn btn-primary" href="#">View details »</a></p>
+                    </div>
+                </div>
+                
+              </div>
+
+            <!-- Classes -->
+            <div class="tab-pane" id="classes">
+                <h2>Classes</h2>
             </div>
-            
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-primary" href="#">View details »</a></p>
-                </div>
-                <div class="col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-primary" href="#">View details »</a></p>
-                </div>
-                <div class="col-lg-4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-                    <p><a class="btn btn-primary" href="#">View details »</a></p>
-                </div>
+
+            <!-- Ideas -->
+            <div class="tab-pane" id="ideas">
+                <h2>Ideas<h2>
             </div>
-            
+
+              <!-- Sign Up -->
+              <div class="tab-pane" id="signin">
+
+                <div class="signin">
+                    
+                    <form class="form-signin">
+                        <h2 class="form-signin-heading">Please sign in</h2>
+                        <input type="text" class="form-control" placeholder="Email address" autofocus>
+                        <input type="password" class="form-control" placeholder="Password">
+                            <label class="checkbox">
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </form>
+                    
+                </div> <!-- /container -->
+                
+              </div>
+              <div class="tab-pane" id="messages">...</div>
+              <div class="tab-pane" id="settings">...</div>
+            </div>
+
+            <script>
+            $('#nav-tabs a, a[data-toggle="tab"]').click(function (e) {
+                console.log(this, e);
+              e.preventDefault()
+              $(this).tab('show')
+            });
+            </script>
+
+
             <!-- Site footer -->
             <div class="footer">
                 <p>&copy; Company 2013</p>
             </div>
-            
-        </div> <!-- /container -->
 
+
+        </div> <!-- /container -->                    
 
         <!-- Bootstrap core JavaScript
          ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
 
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
     </body>
