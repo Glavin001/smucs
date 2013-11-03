@@ -1,0 +1,29 @@
+{
+	"name": "SMUCS",
+	"version": "0.0.1",
+	"description": "Saint Mary's University Computer Science",
+	"author": {
+		"name": "Glavin Wiechert",
+		"email": "glavin.wiechert@gmail.com"
+	},
+	"website":{
+		"url": "140.184.132.237"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:Glavin001/smucs.git"
+	},
+	"private": true,
+	"dependencies": {
+		"express": "3.0.6",
+		"stylus": "0.31.0",
+		"jade": "0.27.7",
+		"mongodb": "1.2.7",
+		"moment" : "1.7.2",
+		"emailjs": "0.3.3"
+	},
+	"engines": {
+		"node": "0.8.14",
+		"npm":  "1.1.65"
+	}
+}

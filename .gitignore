@@ -1,1 +1,15 @@
+# Mac
 .DS_Store
+.DS_Store?
+.Splotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Vim
+*~
+*.swp
+*.swo
+
+# Node Modules
+node_modules
