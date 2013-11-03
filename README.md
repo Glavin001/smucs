@@ -1,8 +1,11 @@
 SMUCS
 =====
 
-Saint Mary's University Computer Science
+This is a repository for the Saint Mary's University Computer Science society website
 
-Live website: http://glavin001.github.io/smucs/
+Live website: http://140.184.132.237:8082
 
-This is a repository for the SMU CS website.
+-----
+
+#### For Developers:
+https://github.com/Glavin001/smucs/wiki/Developer
