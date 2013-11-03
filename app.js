@@ -9,8 +9,28 @@ var express = require('express');
 var http = require('http');
 var app = express();
 
+// Properties
+var port = 8080
+
+process.argv.forEach(function (val, index, array) {
+  // console.log(index + ': ' + val);
+  
+  // Customize port number, "[-p #]"
+  if (val == "-p") {
+  	//
+  	var newPort = parseInt( array[index+1] );
+  	if (! isNaN(newPort )) {
+  		//console.log("New port #:", newPort);
+  		port = newPort;
+  	} else {
+  		console.error("Invalid custom port number: ", newPort);
+  	}
+  }
+
+}); 
+
 app.configure(function(){
-	app.set('port', 8080);
+	app.set('port', port);
 	app.set('views', __dirname + '/app/server/views');
 	app.set('view engine', 'jade');
 	app.locals.pretty = true;
