@@ -11,7 +11,7 @@ var app = express();
 
 // Properties
 var port = 8080
-
+// Process command line arguments
 process.argv.forEach(function (val, index, array) {
   // console.log(index + ': ' + val);
   
