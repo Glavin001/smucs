@@ -18,7 +18,7 @@ module.exports = function(app) {
 				if (o != null){
 				    req.session.user = o;
 					res.redirect('/home');
-				}	else{
+				}	else {
 					res.render('login', { title: 'Hello - Please Login To Your Account' });
 				}
 			});
@@ -29,7 +29,7 @@ module.exports = function(app) {
 		AM.manualLogin(req.param('user'), req.param('pass'), function(e, o){
 			if (!o){
 				res.send(e, 400);
-			}	else{
+			}	else {
 			    req.session.user = o;
 				if (req.param('remember-me') == 'true'){
 					res.cookie('user', o.user, { maxAge: 900000 });
@@ -46,9 +46,9 @@ module.exports = function(app) {
 	    if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
 	        res.redirect('/');
-	    }   else{
+	    }   else {
 			res.render('home', {
-				title : 'Control Panel',
+				title : 'Home',
 				countries : CT,
 				udata : req.session.user
 			});
@@ -159,9 +159,9 @@ module.exports = function(app) {
 	
 // view & delete accounts //
 	
-	app.get('/print', function(req, res) {
+	app.get('/users', function(req, res) {
 		AM.getAllRecords( function(e, accounts){
-			res.render('print', { title : 'Account List', accts : accounts });
+			res.render('users', { title : 'Users', accts : accounts, udata : req.session.user });
 		})
 	});
 	
@@ -189,7 +189,7 @@ module.exports = function(app) {
 	        res.redirect('/');
 	    }   else{
 			res.render('account_settings', {
-				title : 'Control Panel',
+				title : "Account",
 				countries : CT,
 				udata : req.session.user
 			});
@@ -212,7 +212,7 @@ module.exports = function(app) {
 				data = JSON.parse(data);
 
 	 			res.render('courses', {
-					title : 'Control Panel',
+					title : 'Courses',
 					countries : CT,
 					udata : req.session.user,
 					courses : data

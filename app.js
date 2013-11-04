@@ -8,6 +8,8 @@
 var express = require('express');
 var http = require('http');
 var app = express();
+var server = http.createServer(app)
+var io = require("socket.io").listen(server);
 
 // Display command line arguments
 console.log("Usage:")
@@ -34,7 +36,7 @@ process.argv.forEach(function (val, index, array) {
 
 }); 
 
-app.configure(function(){
+app.configure(function() {
 	app.set('port', port);
 	app.set('views', __dirname + '/app/server/views');
 	app.set('view engine', 'jade');
@@ -55,6 +57,38 @@ app.configure('development', function(){
 
 require('./app/server/router')(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
 	console.log("Express server listening on port " + app.get('port'));
 })
+
+// Chat
+var chat = {
+	room: "chat",
+	history: [ ]
+};
+// Socket.io
+io.sockets.on('connection', function (socket) {
+	
+	// Join chat room
+	socket.join(chat.room);
+	// Broadcast join	
+	socket.broadcast.to(chat.room).emit('sendChat', {"name":"Server", "msg": "User joined."});
+
+	socket.on("disconnect", function(data) {
+		console.log("Disconnected ");
+	});
+
+	socket.on("sendChat", function(data) {
+		socket.broadcast.to(chat.room).emit('sendChat', data);
+	});
+
+	/*
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	*/
+
+});
+
+

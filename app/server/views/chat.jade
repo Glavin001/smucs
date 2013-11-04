@@ -1,0 +1,11 @@
+//- Chat
+script(src="/js/controllers/chat.js")
+link(rel='stylesheet', href='/css/chat.css')
+//- Frame
+div.chat.well(style="bottom: 0px; position: absolute; right: 0px; width: 300px; margin-right: 5px; margin-bottom: 0px; padding:0px;")
+	div(style="overflow: scroll; height: 150px; margin-bottom: 0px; padding:0px; ")
+		ul(style="list-style-type: none; padding-left: 0px; margin-left: 10px;")
+			
+	p.form-inline(style="margin-left: 10px;").form
+		input(type="text", placeholder="Type your message here...")
+		button.btn.btn-primary.send-btn Send
