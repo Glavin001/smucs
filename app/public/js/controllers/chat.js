@@ -6,7 +6,7 @@ $(document).ready( function() {
 	var $sendBtn = $(".send-btn", $form);
 	
 	//console.log($history);
-	var socket = io.connect('http://localhost');
+	var socket = io.connect('/');
 	socket.on('sendChat', function (data) {
 		console.log(data);
 		// Display it
@@ -16,13 +16,23 @@ $(document).ready( function() {
 		$history.append($n);
 	});
 
-	$sendBtn.on("click", function(e) {
-		console.log()
+	function sendMsg() {
 		// Get message
 		var msg = $input.val();
+		$input.val("");
 		var data = { "name" : "User", "msg" : msg };
 		socket.emit('sendChat', data);
-	
+	};
+
+	$sendBtn.on("click", function(event) {
+		sendMsg();
+	});
+
+	$input.keypress(function(event) {
+		if (event.which === 13 )// Pressed Enter key 
+		{
+			sendMsg();
+		}
 	});
 
 });

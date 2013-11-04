@@ -79,7 +79,8 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on("sendChat", function(data) {
-		socket.broadcast.to(chat.room).emit('sendChat', data);
+		//socket.broadcast.to(chat.room).emit('sendChat', data);
+		io.sockets.in(chat.room).emit('sendChat', data);
 	});
 
 	/*
