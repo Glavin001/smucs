@@ -24,6 +24,10 @@ h1 {
 #global-nav li a {
   color: #fff;
 }
+.navbar #global-nav li a.brand {
+  color: #8b1c1c;
+  font-weight: bold;
+}
 #login-container {
   width: 340px;
   margin: 160px auto;
@@ -102,9 +106,6 @@ h1 {
 }
 #btn-logout {
   width: 100px;
-  top: 1px;
-  right: 8px;
-  position: absolute;
 }
 #print {
   padding: 20px;
