@@ -1,0 +1,25 @@
+
+extends layout
+
+block content
+	div.container(style='margin:20px')
+		table.table.table-bordered.table-striped
+			thead
+				tr
+					th(style='width:40px') #
+					th(style='width:180px') Title
+					th Credit Hours
+					th Prerequisite
+					th Times
+					th(style='width:200px') Description
+					th(style='width:180px') Note
+			tbody
+			- for (var i = 0; i < courses.length; i++)
+				tr
+					td= i+1
+					td= courses[i].title
+					td= courses[i].creditHours
+					td= courses[i].prerequisite
+					td= courses[i].times
+					td= courses[i].description
+					td= courses[i].note

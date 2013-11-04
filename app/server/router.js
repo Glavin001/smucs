@@ -1,3 +1,4 @@
+var fs = require('fs');
 
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
@@ -182,6 +183,33 @@ module.exports = function(app) {
 		});
 	});
 	
+
+
+	app.get('/courses', function(req, res) {
+	    if (req.session.user == null){
+			// if user is not logged-in redirect back to login page //
+	        res.redirect('/');
+	    } else {
+			var file = __dirname + '/views/courses.json';
+			fs.readFile(file, 'utf8', function (err, data) {
+				if (err) {
+					console.log('Error: ' + err);
+					return;
+				}
+
+				data = JSON.parse(data);
+
+	 			res.render('courses', {
+					title : 'Control Panel',
+					countries : CT,
+					udata : req.session.user,
+					courses : data
+				});
+
+			});
+	    }
+	});
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };
