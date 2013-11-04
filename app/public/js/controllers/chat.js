@@ -8,20 +8,27 @@ $(document).ready( function() {
 	//console.log($history);
 	var socket = io.connect('/');
 	socket.on('sendChat', function (data) {
-		console.log(data);
+		//console.log(data);
 		// Display it
 		var $n = $("<li/>")
 			.append( $("<span/>",{'class':'user'}).html(data.name + ": ") )
 			.append( $("<span/>",{'class':'msg'}).html(data.msg) );
 		$history.append($n);
+		// Auto scroll to last message
+		var $scroll = $("div", $chat);
+		$scroll.scrollTop( $history.height() );
+
 	});
 
 	function sendMsg() {
 		// Get message
 		var msg = $input.val();
 		$input.val("");
-		var data = { "name" : "User", "msg" : msg };
-		socket.emit('sendChat', data);
+		if (msg !== "") // Check if empty
+		{
+			var data = { "name" : "User", "msg" : msg };
+			socket.emit('sendChat', data);
+		}
 	};
 
 	$sendBtn.on("click", function(event) {
