@@ -7,5 +7,23 @@ html
 	body.hasNavigation
 		include github_banner
 		include navbar
+	
 	block content
+	
+	//- jQuery
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	//- Bootstrap
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	//- GoInstant
+	script(src='https://cdn.goinstant.net/v1/platform.min.js')
+	//- GoInstant - User-List Widget
+	<script src="https://cdn.goinstant.net/widgets/user-list/latest/user-list.min.js"></script>
+	<link href="https://cdn.goinstant.net/widgets/user-list/latest/user-list.css" rel="stylesheet" type="text/css" />
+	script(src='/js/controllers/goinstant.js')
+	//- GoInstant - User-Colors Widget
+	<script type="text/javascript" src="https://cdn.goinstant.net/v1/platform.min.js"></script>
+	<script type="text/javascript" src="https://cdn.goinstant.net/widgets/user-colors/latest/user-colors.min.js"></script>
+
 	block scripts
