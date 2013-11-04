@@ -3,7 +3,10 @@ $(document).ready( function() {
 	var $history = $("ul", $chat);
 	var $form = $(".form", $chat);
 	var $input = $("input", $form);
+	var $scroll = $(".scroll-view", $chat);
+	var $header = $(".header-bar", $chat);
 	var $sendBtn = $(".send-btn", $form);
+	var $minBtn = $(".minimize-btn", $chat);
 	
 	//console.log($history);
 	var socket = io.connect('/');
@@ -15,7 +18,6 @@ $(document).ready( function() {
 			.append( $("<span/>",{'class':'msg'}).html(data.msg) );
 		$history.append($n);
 		// Auto scroll to last message
-		var $scroll = $("div", $chat);
 		$scroll.scrollTop( $history.height() );
 
 	});
@@ -39,6 +41,24 @@ $(document).ready( function() {
 		if (event.which === 13 )// Pressed Enter key 
 		{
 			sendMsg();
+		}
+	});
+
+	// Maximize and Minimize
+	$minBtn.click(function(event) {
+		//console.log("Toggle")
+		if ( $chat.hasClass("closed") ) {
+			// Already closed
+			// Then open it
+			$chat.removeClass("closed");
+			// Display new message
+			$minBtn.html("&#8595; Minimize");			
+		} else {
+			// Currently Open
+			// Then close it
+			$chat.addClass("closed");
+			// Display new message
+			$minBtn.html("&#8593; Maximize");
 		}
 	});
 

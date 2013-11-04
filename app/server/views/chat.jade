@@ -2,10 +2,21 @@
 script(src="/js/controllers/chat.js")
 link(rel='stylesheet', href='/css/chat.css')
 //- Frame
-div.chat.well(style="bottom: 0px; position: absolute; right: 0px; width: 300px; margin-right: 5px; margin-bottom: 0px; padding:0px;")
-	div(style="overflow: scroll; height: 150px; margin-bottom: 0px; padding:0px; ")
-		ul(style="list-style-type: none; padding-left: 0px; margin-left: 10px;")
+div.chat.well()
+	div.header-bar.alert.alert-info()
+		//div.navbar
+		//	div.navbar-inner
+		//	a.brand(href="#") Title
+		//		ul.nav
+		//			<li class="active"><a href="#">Home</a></li>
+		//			<li><a href="#">Link</a></li>
+		//			<li><a href="#">Link</a></li>
+		a().minimize-btn &#8595; Minimize
+		//-a(style="width:20px;") &times;
+
+	div(style="").scroll-view
+		ul(style="")
 			
-	p.form-inline(style="margin-left: 10px;").form
+	p.form-inline(style="").form
 		input(type="text", placeholder="Type your message here...")
 		button.btn.btn-primary.send-btn Send
