@@ -3,9 +3,19 @@ SMUCS
 
 This is a repository for the Saint Mary's University Computer Science society website
 
-- Built on [Node.js](http://nodejs.org/) with [Jade templating](http://jade-lang.com/)
+- Built on [Node.js](http://nodejs.org/)
 - Global Chat system using [Socket.io](http://socket.io/)
 - Uses [Node-Login](https://github.com/braitsch/node-login) for account management.
+
+`Node-Login` is built on top of the following libraries :
+- [Node.js](http://nodejs.org/) - Application Server
+- Express.js - Node.js Web Framework
+- MongoDb - Database Storage
+- [Jade - HTML Templating Engine](http://jade-lang.com/)
+- Stylus - CSS Preprocessor
+- EmailJS - Node.js > SMTP Server Middleware
+- Moment.js - Lightweight Date Library
+- Twitter Bootstrap - UI Component & Layout Library
 
 -----
 
