@@ -1,6 +1,9 @@
 
 /**
-	* Node.js Login Boilerplate
+	Saint Mary's University Computer Science Society Website 
+	Author: Glavin Wiechert
+	
+	* Forked from Node.js Login Boilerplate
 	* More Info : http://bit.ly/LsODY8
 	* Copyright (c) 2013 Stephen Braitsch
 **/
