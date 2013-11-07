@@ -8,6 +8,9 @@ html
 		include github_banner
 		include navbar
 	
+	include modals/alert
+	include modals/confirm
+	
 	block content
 	
 	//- jQuery
@@ -22,5 +25,9 @@ html
 	script(src="/socket.io/socket.io.js")	
 	//- Chat
 	include chat
-	
+	//- For Account management and logging out	
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/homeController.js')
+	script(src='/js/form-validators/accountValidator.js')
+
 	block scripts

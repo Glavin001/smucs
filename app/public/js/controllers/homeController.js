@@ -14,6 +14,8 @@ function HomeController()
 // handle account deletion //
 	$('.modal-confirm .submit').click(function(){ that.deleteAccount(); });
 
+	var gotoLogin = function(){window.location.href = '/';};
+
 	this.deleteAccount = function()
 	{
 		$('.modal-confirm').modal('hide');
@@ -23,7 +25,8 @@ function HomeController()
 			type: 'POST',
 			data: { id: $('#userId').val()},
 			success: function(data){
-	 			that.showLockedAlert('Your account has been deleted.<br>Redirecting you back to the homepage.');
+	 			that.showLockedAlert('Your account has been deleted.<br>Redirecting you back to the homepage.', gotoLogin);
+	 			setTimeout(gotoLogin, 3000);
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -32,14 +35,17 @@ function HomeController()
 	}
 
 	this.attemptLogout = function()
-	{
+	{		
+		console.log('Attempting logout');
 		var that = this;
+		that.showLockedAlert('Logging out.');
 		$.ajax({
 			url: "/home",
 			type: "POST",
 			data: {logout : true},
 			success: function(data){
-	 			that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');
+	 			that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.', gotoLogin);
+	 			setTimeout(gotoLogin, 3000);
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -47,13 +53,12 @@ function HomeController()
 		});
 	}
 
-	this.showLockedAlert = function(msg){
+	this.showLockedAlert = function(msg, okCallback){
 		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
 		$('.modal-alert .modal-header h3').text('Success!');
 		$('.modal-alert .modal-body p').html(msg);
 		$('.modal-alert').modal('show');
-		$('.modal-alert button').click(function(){window.location.href = '/';})
-		setTimeout(function(){window.location.href = '/';}, 3000);
+		okCallback && $('.modal-alert button').click(okCallback);
 	}
 }
 
