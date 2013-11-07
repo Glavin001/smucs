@@ -1,4 +1,4 @@
-var socket = io.connect('/');
+var socket = io.connect('http://localhost');
 $(document).ready( function() {
 	var $chat = $(".chat");
 	var $history = $("ul", $chat);
