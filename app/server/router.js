@@ -7,7 +7,6 @@ var EM = require('./modules/email-dispatcher');
 module.exports = function(app) {
 
 // main login page //
-
 	app.get('/', function(req, res){
 	// check if the user's credentials are saved in a cookie //
 		if (req.cookies.user == undefined || req.cookies.pass == undefined){
@@ -39,9 +38,13 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+// Server Configuration Info
+	app.get('/serverConfig', function(req, res) {
+		res.json({ "port": app.get('port') });
+	});
 	
 // logged-in user homepage //
-	
 	app.get('/home', function(req, res) {
 	    if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
@@ -84,7 +87,6 @@ module.exports = function(app) {
 	});
 	
 // creating new accounts //
-	
 	app.get('/signup', function(req, res) {
 		res.render('signup', {  title: 'Signup', countries : CT });
 	});
@@ -106,7 +108,6 @@ module.exports = function(app) {
 	});
 
 // password reset //
-
 	app.post('/lost-password', function(req, res){
 	// look up the user's account via their email //
 		AM.getAccountByEmail(req.param('email'), function(o){
@@ -158,7 +159,6 @@ module.exports = function(app) {
 	});
 	
 // view & delete accounts //
-	
 	app.get('/users', function(req, res) {
 		AM.getAllRecords( function(e, accounts){
 			res.render('users', { title : 'Users', accts : accounts, udata : req.session.user });
