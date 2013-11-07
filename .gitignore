@@ -13,3 +13,7 @@ Thumbs.db
 
 # Node Modules
 node_modules
+
+# Styl resulting CSS
+app/public/css/*.css
+
