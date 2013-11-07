@@ -1,3 +1,4 @@
+var socket = io.connect('/');
 $(document).ready( function() {
 	var $chat = $(".chat");
 	var $history = $("ul", $chat);
@@ -9,12 +10,12 @@ $(document).ready( function() {
 	var $minBtn = $(".minimize-btn", $chat);
 	
 	//console.log($history);
-	var socket = io.connect('/');
 	socket.on('sendChat', function (data) {
-		//console.log(data);
+		console.log(data);
+		data.color = data.color || "#000";
 		// Display it
 		var $n = $("<li/>")
-			.append( $("<span/>",{'class':'user'}).html(data.name + ": ") )
+			.append( $("<strong/>",{'class':'user', 'style':"color:"+data.color+";"}).html(data.name + ": ") )
 			.append( $("<span/>",{'class':'msg'}).html(data.msg) );
 		$history.append($n);
 		// Auto scroll to last message

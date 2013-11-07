@@ -68,6 +68,7 @@ function onLoad() {
           throw err;
         }
         console.log('The chosen color is ' + color);
+        socket.emit('userColor', {'hex':color});
       });
 
     });
